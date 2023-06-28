@@ -34,8 +34,6 @@ spec:
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
-        kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apis.apps.tanzu.vmware.com/register-api":"true","app.kubernetes.io/part-of":"customer-profile","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web"},"name":"customer-profile","namespace":"dev-space"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"api_descriptor","value":{"description":"Manage customer profiles","location":{"path":"/api-docs"},"owner":"customer-relations-department","system":"profile-management","type":"openapi"}},{"name":"gitops_server_address","value":"https://github.com/"},{"name":"gitops_repository_owner","value":"dipalpat"},{"name":"gitops_repository_name","value":"tap-workloads"}],"serviceClaims":[{"name":"database","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ClassClaim","name":"customer-database"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/dipalpat/java-rest-service"}}}}
         services.conventions.carto.run/postgres: postgresql/42.5.4
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
@@ -57,7 +55,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: gcr.io/pa-dpatel/tap-wkld/customer-profile-dev-space@sha256:74e8f55e1a3e9664a01d8f6baf2e1123203358a1f41b4b33777dc98713c3cdc7
+        image: gcr.io/pa-dpatel/tap-wkld/customer-profile-dev-space@sha256:e7b7aa78b4ef04a835bfd74d86749aea585ce32fa54b3ec0cec474ec201f5f24
         livenessProbe:
           httpGet:
             path: /livez
